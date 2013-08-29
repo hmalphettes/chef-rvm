@@ -73,7 +73,8 @@ class Chef
         pid, stdin, stdout, stderr = popen4('bash', shell_params(user, user_dir))
         stdin.puts(cmd)
         stdin.close
-
+Chef::Log.info('cmd ' + cmd)
+Chef::Log.info(' stdout ' + cmd)
         result = stdout.read.split('\n').first.chomp
         if result =~ /^-/   # if the result has a leading dash, value is bogus
           Chef::Log.warn("Could not determine canonical RVM string for: #{str} " +
