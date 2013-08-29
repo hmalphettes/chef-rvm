@@ -75,8 +75,8 @@ class Chef
         stdin.close
 Chef::Log.info('cmd ' + cmd)
 Chef::Log.info(' stdout ' + stdout.read)
-        read_str = stdout.read
-        result = read_str ? read_str.split('\n').first.chomp : ''
+        result = stdout.read.split('\n').first
+        result = result.chomp if result
         if result =~ /^-/   # if the result has a leading dash, value is bogus
           Chef::Log.warn("Could not determine canonical RVM string for: #{str} " +
                          "(#{user || 'system'})")
